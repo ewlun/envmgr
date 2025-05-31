@@ -1,0 +1,4 @@
+alias this=that
+alias ls -la=ls
+
+alias one=two

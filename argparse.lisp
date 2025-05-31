@@ -36,7 +36,7 @@
 	(apply fn (subseq args (+ i 1) (+ i len 1)))
 	(SETF i (+ i len))))))
 
-(parse-args '("main.exe" "--alias" "ls -lah" "ls" "--print")
-	    ("--alias" (lambda (one two) (format t "Aliasing ~a to ~a~%" one two)))
-	    ("--print" (lambda () (format t "Printing out everything~%")))
-	    ("--test" #'+))
+;; (parse-args '("main.exe" "--alias" "ls -lah" "ls" "--print")
+;; 	    ("--alias" (lambda (one two) (format t "Aliasing ~a to ~a~%" one two)))
+;; 	    ("--print" (lambda () (format t "Printing out everything~%")))
+;; 	    ("--test" #'+))
