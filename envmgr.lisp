@@ -43,7 +43,7 @@
 	     (second pair))
 	(format stream "~%"))))
 
-(defun main (argv)
+(defun main (&optional argv)
   "Usage: envmgr [options]
 
 Options:
@@ -51,11 +51,14 @@ Options:
   -v, --variable <variable> <value>
   -p, --print
   -i, --interactive"
+
+  (or argv (setf argv sb-ext:*posix-argv*))
   
   (with-open-file (file "aliases" :direction :io :if-exists :overwrite)
     (let* ((lines (uiop:read-file-lines file)) (content (mapcar #'handle-file-line lines)))
       (parse-args argv
-		  ("--help" (lambda () (format t "~a" (documentation #'main 'function))))
+		  ("--help" (lambda () (format t "~a~%" (documentation #'main 'function))))
 		  ("--alias" (lambda (original new) (change-value original new 'alias content)))
+		  ("--variable" (lambda (variable value) (change-value variable value 'export content)))
 		  ("--print" (lambda () (handle-print content))))
       (rebuild-file content file))))
