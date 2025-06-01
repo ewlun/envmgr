@@ -8,5 +8,6 @@
   :serial t
   :depends-on (:iterate)
   :components ((:file "package")
+	       (:file "arrow")
 	       (:file "argparse")
                (:file "envmgr")))
