@@ -1,4 +1,5 @@
-alias this=that
-alias ls -la=ls
-
-alias one=two
+alias "this"="that"
+alias "ls -la"="those"
+alias "one"="two"
+alias "old"="new"
+alias "git add ."="ga"

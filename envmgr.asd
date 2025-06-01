@@ -6,7 +6,7 @@
   :license  "GPL"
   :version "0.0.1"
   :serial t
-  :depends-on (:iterate)
+  :depends-on (:iterate :str)
   :components ((:file "package")
 	       (:file "arrow")
 	       (:file "argparse")
