@@ -16,9 +16,31 @@
 	(setf content (nconc content (list (list original new type)))))))
 
 (defun handle-print (content)
-  (iter (for pair in content)
-    (if pair
-	(format t "~s~%" pair))))
+  (let* ((lengths (iter (for pair in content)
+		    (maximize (length (first pair)) into k)
+		    (maximize (length (second pair)) into v)
+		    (maximize (length (string  (third pair))) into tl)
+		    (finally (return (list k v tl)))))
+	 (key (+ 2 (first lengths)))
+	 (value (+ 2 (second lengths)))
+	 (type (+ 2 (third lengths))))
+
+    (let ((header (format nil "| ~v,,,' :@<Key~> | ~v,,,' :@<Value~> | ~v,,,' :@<Type~> |"
+			  (- key 2) (- value 2) (- type 2))))
+
+      (format t "+~v,,,'-<-~>+~v,,,'-<-~>+~v,,,'-<-~>+~%" key value type)
+      (format t "~a~%" header)
+      (format t "+~v,,,'-<-~>+~v,,,'-<-~>+~v,,,'-<-~>+~%" key value type))
+    
+    (iter (for pair in content)
+      (if pair
+	  (format t "|~v,,,' :@<~a~>|~v,,,' :@<~a~>|~v,,,' :@<~a~>|~%"
+		  key (first pair)
+		  value (second pair)
+		  type (third pair))))
+    
+    (format t "+~v,,,'-<-~>+~v,,,'-<-~>+~v,,,'-<-~>+~%" key value type))))
+
 
 ;; TODO: import clj-arrows instead
 (defun handle-file-line (line)
