@@ -2,4 +2,5 @@
 #*
 .#*
 *.fasl
-aliases
+/aliases
+/envmgr
