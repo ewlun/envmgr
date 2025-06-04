@@ -11,4 +11,5 @@
 (sb-ext:save-lisp-and-die "envmgr"
 			  :toplevel #'envmgr:main
 			  :executable t
+			  :save-runtime-options t
 			  :compression nil)
